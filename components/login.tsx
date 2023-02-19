@@ -1,5 +1,6 @@
 import { useOutletContext } from "@remix-run/react";
 import type { SupabaseOutletContextType } from "types/setup";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { supabase } = useOutletContext<SupabaseOutletContextType>();
@@ -10,16 +11,20 @@ const Login = () => {
     });
 
     if (error) {
-      console.log(error, "error");
+      toast.error("Unknown error");
     }
+
+    toast.success("Login success");
   };
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      console.log(error, "error");
+      toast.error("Unknown error");
     }
+
+    toast.success("Logout success");
   };
 
   return (

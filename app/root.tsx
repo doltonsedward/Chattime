@@ -10,8 +10,13 @@ import {
 import { json, type LoaderArgs, type MetaFunction } from "@remix-run/node";
 import { createClient } from "@supabase/supabase-js";
 import { useState } from "react";
-
 import type { Database } from "types/db_types";
+import { ToastContainer } from "react-toastify";
+import toastStyle from "react-toastify/dist/ReactToastify.css";
+
+export function links() {
+  return [{ rel: "stylesheet", href: toastStyle }];
+}
 
 export const loader = async (x: LoaderArgs) => {
   const env = {
@@ -42,6 +47,18 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <Outlet context={{ supabase }} />
         <ScrollRestoration />
         <Scripts />
